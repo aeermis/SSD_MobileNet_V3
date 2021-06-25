@@ -333,7 +333,6 @@ node {
   op: "FusedBatchNormV3"
   input: "FeatureExtractor/MobilenetV3/expanded_conv_1/expand/Conv2D"
   input: "FeatureExtractor/MobilenetV3/expanded_conv_1/expand/BatchNorm/gamma"
-  input: "FeatureExtractor/MobilenetV3/expanded_conv_1/expand/BatchNorm/beta"
   input: "FeatureExtractor/MobilenetV3/expanded_conv_1/expand/BatchNorm/moving_mean"
   input: "FeatureExtractor/MobilenetV3/expanded_conv_1/expand/BatchNorm/moving_variance"
   attr {
@@ -751,7 +750,6 @@ node {
   name: "FeatureExtractor/MobilenetV3/expanded_conv_3/expand/Conv2D"
   op: "Conv2D"
   input: "FeatureExtractor/MobilenetV3/expanded_conv_3/input"
-  input: "FeatureExtractor/MobilenetV3/expanded_conv_3/expand/weights"
   attr {
     key: "data_format"
     value {
@@ -968,11 +966,6 @@ node {
       s: "NHWC"
     }
   }
-}
-node {
-  name: "FeatureExtractor/MobilenetV3/expanded_conv_3/squeeze_excite/Conv/Relu"
-  op: "Relu"
-  input: "FeatureExtractor/MobilenetV3/expanded_conv_3/squeeze_excite/Conv/BiasAdd"
 }
 node {
   name: "FeatureExtractor/MobilenetV3/expanded_conv_3/squeeze_excite/Conv_1/Conv2D"
@@ -1740,18 +1733,6 @@ node {
   }
 }
 node {
-  name: "FeatureExtractor/MobilenetV3/expanded_conv_5/squeeze_excite/Conv/BiasAdd"
-  op: "BiasAdd"
-  input: "FeatureExtractor/MobilenetV3/expanded_conv_5/squeeze_excite/Conv/Conv2D"
-  input: "FeatureExtractor/MobilenetV3/expanded_conv_5/squeeze_excite/Conv/biases"
-  attr {
-    key: "data_format"
-    value {
-      s: "NHWC"
-    }
-  }
-}
-node {
   name: "FeatureExtractor/MobilenetV3/expanded_conv_5/squeeze_excite/Conv/Relu"
   op: "Relu"
   input: "FeatureExtractor/MobilenetV3/expanded_conv_5/squeeze_excite/Conv/BiasAdd"
@@ -2450,12 +2431,7 @@ node {
     }
   }
 }
-node {
-  name: "FeatureExtractor/MobilenetV3/expanded_conv_7/add"
-  op: "AddV2"
-  input: "FeatureExtractor/MobilenetV3/expanded_conv_7/project/BatchNorm/FusedBatchNormV3"
-  input: "FeatureExtractor/MobilenetV3/expanded_conv_6/output"
-}
+
 node {
   name: "FeatureExtractor/MobilenetV3/expanded_conv_8/input"
   op: "Identity"
@@ -2824,12 +2800,7 @@ node {
   input: "FeatureExtractor/MobilenetV3/expanded_conv_9/expand/BatchNorm/FusedBatchNormV3"
   input: "FeatureExtractor/MobilenetV3/expanded_conv_9/expand/hard_swish/Relu6"
 }
-node {
-  name: "FeatureExtractor/MobilenetV3/expanded_conv_9/expand/hard_swish/mul_1"
-  op: "Mul"
-  input: "FeatureExtractor/MobilenetV3/expanded_conv_9/expand/hard_swish/mul"
-  input: "FeatureExtractor/MobilenetV3/expanded_conv_9/expand/hard_swish/mul_1/y"
-}
+
 node {
   name: "FeatureExtractor/MobilenetV3/expanded_conv_9/depthwise/depthwise"
   op: "DepthwiseConv2dNative"
@@ -3509,11 +3480,7 @@ node {
   input: "FeatureExtractor/MobilenetV3/expanded_conv_11/expand/BatchNorm/FusedBatchNormV3"
   input: "FeatureExtractor/MobilenetV3/expanded_conv_11/expand/hard_swish/add/y"
 }
-node {
-  name: "FeatureExtractor/MobilenetV3/expanded_conv_11/expand/hard_swish/Relu6"
-  op: "Relu6"
-  input: "FeatureExtractor/MobilenetV3/expanded_conv_11/expand/hard_swish/add"
-}
+
 node {
   name: "FeatureExtractor/MobilenetV3/expanded_conv_11/expand/hard_swish/mul"
   op: "Mul"
@@ -4483,17 +4450,7 @@ node {
       s: "NHWC"
     }
   }
-  attr {
-    key: "dilations"
-    value {
-      list {
-        i: 1
-        i: 1
-        i: 1
-        i: 1
-      }
-    }
-  }
+ 
   attr {
     key: "explicit_paddings"
     value {
@@ -4710,9 +4667,6 @@ node {
   }
   attr {
     key: "U"
-    value {
-      type: DT_FLOAT
-    }
   }
 }
 node {
@@ -4930,19 +4884,7 @@ node {
     value {
       s: "SAME"
     }
-  }
-  attr {
-    key: "strides"
-    value {
-      list {
-        i: 1
-        i: 1
-        i: 1
-        i: 1
-      }
-    }
-  }
-}
+
 node {
   name: "FeatureExtractor/MobilenetV3/expanded_conv_13/project/BatchNorm/FusedBatchNormV3"
   op: "FusedBatchNormV3"
@@ -5360,19 +5302,6 @@ node {
     value {
       s: "SAME"
     }
-  }
-  attr {
-    key: "strides"
-    value {
-      list {
-        i: 1
-        i: 1
-        i: 1
-        i: 1
-      }
-    }
-  }
-}
 node {
   name: "FeatureExtractor/MobilenetV3/expanded_conv_14/project/BatchNorm/FusedBatchNormV3"
   op: "FusedBatchNormV3"
@@ -5805,19 +5734,7 @@ node {
     value {
       s: "SAME"
     }
-  }
-  attr {
-    key: "strides"
-    value {
-      list {
-        i: 1
-        i: 1
-        i: 1
-        i: 1
-      }
-    }
-  }
-}
+
 node {
   name: "FeatureExtractor/MobilenetV3/layer_17_1_Conv2d_2_1x1_256/BatchNorm/FusedBatchNormV3"
   op: "FusedBatchNormV3"
@@ -6154,11 +6071,7 @@ node {
       }
     }
   }
-  attr {
-    key: "padding"
-    value {
-      s: "SAME"
-    }
+
   }
   attr {
     key: "strides"
